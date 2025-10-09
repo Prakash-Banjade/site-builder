@@ -19,14 +19,18 @@ import AddKeywordsBtn from "./add-keywords-btn";
 import CoverImageUploadBtn from "./cover-image-upload-btn";
 import useEffectAfterMount from "@/hooks/useEffectAfterMount";
 import YooptaEditorReadonly from "@/components/yoopta-editor/readonly";
-import { Form } from "@/components/ui/form";
 import { TBlog } from "../../../../types/blog.types";
+import { SelectOption } from "../../../../types/global.types";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+
 
 type Props = {
     defaultValues: TBlog;
+    categoryOptions: SelectOption[];
 }
 
-export default function BlogForm({ defaultValues }: Props) {
+export default function BlogForm({ defaultValues, categoryOptions }: Props) {
     const [isPending, startTransition] = useTransition();
     const isPublished = defaultValues.publishedAt !== null;
 
@@ -161,6 +165,30 @@ export default function BlogForm({ defaultValues }: Props) {
                         summary={form.watch("summary")}
                         onChange={(value) => form.setValue("summary", value)}
                         disabled={isPublished}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="categoryId"
+                        render={({ field }) => (
+                            <FormItem>
+                                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                    <FormControl>
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select category" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        {
+                                            categoryOptions.map((category) => (
+                                                <SelectItem key={category.value} value={category.value}>{category.label}</SelectItem>
+                                            ))
+                                        }
+                                    </SelectContent>
+                                </Select>
+                                <FormMessage />
+                            </FormItem>
+                        )}
                     />
 
                     <AddKeywordsBtn

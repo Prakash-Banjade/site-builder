@@ -1,6 +1,7 @@
 import { YooptaContentValue } from "@yoopta/editor";
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import { boolean, index, integer, jsonb, pgTable, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core";
+import { categoryTable } from "./category";
 
 export const blogs = pgTable(
     "blogs",
@@ -18,6 +19,7 @@ export const blogs = pgTable(
         isFavourite: boolean("isFavourite").default(false).notNull(),
         length: integer("length").default(0).notNull(),
         keywords: text("keywords").array().default(sql`ARRAY[]::text[]`).notNull(),
+        categoryId: text("category_id").references(() => categoryTable.id, { onDelete: "cascade" }).notNull(),
     },
     (table) => [
         uniqueIndex("slug_idx").on(table.slug),
@@ -25,9 +27,9 @@ export const blogs = pgTable(
     ]
 );
 
-// export const comments = pgTable("comments", {
-//   id: t.integer().primaryKey().generatedAlwaysAsIdentity(),
-//   text: t.varchar({ length: 256 }),
-//   postId: t.integer("post_id").references(() => posts.id),
-//   ownerId: t.integer("owner_id").references(() => users.id),
-// });
+export const blogsRelations = relations(blogs, ({ one }) => ({
+    author: one(categoryTable, {
+        fields: [blogs.categoryId],
+        references: [categoryTable.id],
+    }),
+}));

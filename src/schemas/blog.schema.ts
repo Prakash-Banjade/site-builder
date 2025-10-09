@@ -16,6 +16,7 @@ export const blogSchema = z.object({
     isFavourite: z.boolean(),
     publishedAt: z.date().nullish(),
     length: z.number().min(0),
+    categoryId: z.string().uuid({ message: "Category is required" }),
 });
 
 export type blogSchemaType = z.infer<typeof blogSchema>;
@@ -29,4 +30,5 @@ export const blogFormDefaultValues: blogSchemaType = {
     isFavourite: false,
     publishedAt: null,
     length: 0,
+    categoryId: "",
 }

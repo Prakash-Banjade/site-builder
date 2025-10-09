@@ -1,8 +1,10 @@
 import BlogForm from '@/components/cms/blogs/blog-form';
 import { db } from '@/db';
 import { blogs } from '@/db/schema/blog';
+import { categoryTable } from '@/db/schema/category';
 import { eq } from 'drizzle-orm';
 import { Info } from 'lucide-react';
+import { SelectOption } from '../../../../../../types/global.types';
 
 type Props = {
     params: {
@@ -23,6 +25,8 @@ export default async function BlogEditPage(props: { params: Promise<Props["param
 
     const blog = foundBlogs[0];
 
+    const categories: SelectOption[] = await db.select({ value: categoryTable.id, label: categoryTable.name }).from(categoryTable);
+
     return (
         <>
             {
@@ -34,7 +38,7 @@ export default async function BlogEditPage(props: { params: Promise<Props["param
                 )
             }
 
-            <BlogForm defaultValues={blog} />
+            <BlogForm defaultValues={blog} categoryOptions={categories} />
         </>
     )
 }
