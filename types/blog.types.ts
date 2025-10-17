@@ -17,4 +17,4 @@ export type TBlog = {
 
 export type TBlogsResponse = Pick<TBlog, "id" | "title" | "slug" | "updatedAt" | "publishedAt" | "isFavourite">[];
 
-export type TBlogsResponse_Public = Pick<TBlog, "id" | "title" | "slug" | "summary" | "publishedAt" | "keywords" | "coverImage" | "length" | "author">[]
+export type TBlogsResponse_Public = Pick<TBlog, "id" | "title" | "slug" | "summary" | "publishedAt" | "keywords" | "coverImage" | "length" | "author" | "updatedAt">[]

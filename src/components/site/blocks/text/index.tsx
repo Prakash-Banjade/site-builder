@@ -3,7 +3,6 @@ import { TextBlockDto } from "@/schemas/page.schema";
 import { EAlignment } from "../../../../../types/global.types";
 import CMSLink from "@/components/ui/cms-link";
 import { RichTextPreview } from "@/components/editor/blocks/editor-x/rich-text-preview";
-import isEmptyHTML from "@/lib/utilities/isEmptyHTML";
 
 export default function RenderTextBlock({
     align,
@@ -43,13 +42,9 @@ export default function RenderTextBlock({
                     {subheadline}
                 </p>
             </div>
-            {
-                !isEmptyHTML(body.html) && (
-                    <section>
-                        <RichTextPreview html={body.html} />
-                    </section>
-                )
-            }
+
+            <RichTextPreview html={body.html} />
+            
             {
                 Array.isArray(cta) && cta.length > 0 && (
                     <ul className={cn(

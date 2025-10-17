@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { ELinkType } from '../../../../../types/global.types'
 import CloudinaryImage from '@/components/ui/cloudinary-image'
 import { RichTextPreview } from '@/components/editor/blocks/editor-x/rich-text-preview'
-import isEmptyHTML from '@/lib/utilities/isEmptyHTML'
 
 export default function RenderCardsBlock({
     cards,
@@ -70,11 +69,7 @@ export default function RenderCardsBlock({
                             )}
                             <CardContent>
                                 <p className='text-muted-foreground'>{card.subtitle}</p>
-                                {
-                                    !isEmptyHTML(card.description.html) && (
-                                        <RichTextPreview html={card.description.html} />
-                                    )
-                                }
+                                <RichTextPreview html={card.description.html} />
                             </CardContent>
                         </Card>
                     )
