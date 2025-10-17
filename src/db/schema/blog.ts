@@ -19,7 +19,8 @@ export const blogs = pgTable(
         isFavourite: boolean("isFavourite").default(false).notNull(),
         length: integer("length").default(0).notNull(),
         keywords: text("keywords").array().default(sql`ARRAY[]::text[]`).notNull(),
-        categoryId: text("category_id").references(() => categoryTable.id, { onDelete: "cascade" }).notNull(),
+        categoryId: text("categoryId").references(() => categoryTable.id, { onDelete: "cascade" }).notNull(),
+        author: text("author").notNull().default("Unknown"),
     },
     (table) => [
         uniqueIndex("slug_idx").on(table.slug),

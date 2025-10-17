@@ -12,8 +12,9 @@ export type TBlog = {
     updatedAt: Date;
     isFavourite: boolean;
     length: number;
+    author: string
 }
 
 export type TBlogsResponse = Pick<TBlog, "id" | "title" | "slug" | "updatedAt" | "publishedAt" | "isFavourite">[];
 
-export type TBlogsResponse_Public = Pick<TBlog, "id" | "title" | "slug" | "summary" | "publishedAt" | "keywords" | "coverImage" | "length">[]
+export type TBlogsResponse_Public = Pick<TBlog, "id" | "title" | "slug" | "summary" | "publishedAt" | "keywords" | "coverImage" | "length" | "author">[]

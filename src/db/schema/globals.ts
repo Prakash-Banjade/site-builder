@@ -1,14 +1,15 @@
 import { pgTable, text, jsonb, timestamp } from "drizzle-orm/pg-core";
 import { TNavLinksDto } from "@/schemas/globals.schema";
+import { IRichTextSchema } from "@/schemas/rich-text.schema";
 
 export const header = pgTable(
     "header",
     {
         id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
-        navLinks: jsonb("nav_links").$type<TNavLinksDto>().notNull(),
+        navLinks: jsonb("navLinks").$type<TNavLinksDto>().notNull(),
 
-        createdAt: timestamp("created_at").notNull().defaultNow(),
-        updatedAt: timestamp("updated_at").notNull().defaultNow().$onUpdate(() => new Date()),
+        createdAt: timestamp("createdAt").notNull().defaultNow(),
+        updatedAt: timestamp("updatedAt").notNull().defaultNow().$onUpdate(() => new Date()),
     }
 );
 
@@ -16,11 +17,11 @@ export const footer = pgTable(
     "footer",
     {
         id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
-        navLinks: jsonb("nav_links").$type<TNavLinksDto>().notNull(),
-        footerText: text("footer_text").notNull().default(""),
+        navLinks: jsonb("navLinks").$type<TNavLinksDto>().notNull(),
+        footerText: jsonb("footerText").$type<IRichTextSchema>().notNull(),
 
-        createdAt: timestamp("created_at").notNull().defaultNow(),
-        updatedAt: timestamp("updated_at").notNull().defaultNow().$onUpdate(() => new Date()),
+        createdAt: timestamp("createdAt").notNull().defaultNow(),
+        updatedAt: timestamp("updatedAt").notNull().defaultNow().$onUpdate(() => new Date()),
     }
 );
 

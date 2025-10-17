@@ -6,7 +6,8 @@ export default function BlogHero({
     title,
     publishedAt,
     coverImage,
-    length
+    length,
+    author
 }: TBlog) {
     return (
         <div className="relative -mt-[10.4rem] flex items-end">
@@ -17,7 +18,7 @@ export default function BlogHero({
                         <div className="flex flex-col gap-4">
                             <div className="flex flex-col gap-1">
                                 <p className="text-sm">Author</p>
-                                <p className="font-medium">Prakash Banjade</p>
+                                <p className="font-medium">{author}</p>
                             </div>
                         </div>
                         {publishedAt && (

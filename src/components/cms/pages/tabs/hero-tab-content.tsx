@@ -139,7 +139,7 @@ function SortableField({
                                             <AccordionTrigger className="text-sm hover:no-underline py-3">
                                                 <section className="space-x-3">
                                                     <span className="font-light">{(idx + 1).toString().padStart(2, "0")}</span>
-                                                    <Badge className="capitalize">{f.layout.type}</Badge>
+                                                    <Badge className="capitalize">{f.layout.type === EHeroLayoutTypes.Jumbotron ? "Jumbotron" : "Split Hero"}</Badge>
                                                 </section>
                                             </AccordionTrigger>
                                             <section className="absolute right-10">
@@ -204,23 +204,7 @@ function SortableField({
                                                     )
                                                 }}
                                             />
-                                            {/* <FormField
-                                                                control={form.control}
-                                                                name={`heroSections.${idx}.subheadline`}
-                                                                render={({ field }) => (
-                                                                    <FormItem>
-                                                                        <FormLabel>Sub Headline</FormLabel>
-                                                                        <FormControl>
-                                                                            <Input
-                                                                                placeholder="Eg. Empowering Innovation and Growth in Nepal's Thriving Entrepreneurial Landscape"
-                                                                                className="py-5"
-                                                                                {...field}
-                                                                            />
-                                                                        </FormControl>
-                                                                        <FormMessage />
-                                                                    </FormItem>
-                                                                )}
-                                                            /> */}
+                                            
                                             <CtaField heroIdx={idx} />
 
                                             <FormField

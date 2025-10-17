@@ -27,7 +27,8 @@ export async function GET(request: NextRequest) {
             publishedAt: blogs.publishedAt,
             keywords: blogs.keywords,
             coverImage: blogs.coverImage,
-            length: blogs.length
+            length: blogs.length,
+            author: blogs.author
         })
         .from(blogs)
         .where(and(...filters, not(isNull(blogs.publishedAt)))) // ensure blogs are published

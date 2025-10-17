@@ -2,12 +2,10 @@ import { Metadata } from "next";
 import RenderHero from "@/components/site/heros/render-hero";
 import RenderSections from "@/components/site/blocks/render-sections";
 import { fetchPage } from "@/lib/utilities/fetchPage";
-import { SITE_TITLE } from "@/CONSTANTS";
-
-const slug = "home";
+import { HOME_SLUG, SITE_TITLE } from "@/CONSTANTS";
 
 export const generateMetadata = async (): Promise<Metadata> => {
-  const { metadata: { title, description, keywords, ogImage } } = await fetchPage(slug);
+  const { metadata: { title, description, keywords, ogImage } } = await fetchPage(HOME_SLUG);
 
   return {
     title,
@@ -31,7 +29,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
 }
 
 export default async function Page() {
-  const page = await fetchPage(slug);
+  const page = await fetchPage(HOME_SLUG);
 
   return (
     <div>

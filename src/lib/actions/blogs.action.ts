@@ -9,13 +9,18 @@ import { revalidatePath } from "next/cache";
 import { generateSlug, throwZodErrorMsg } from "../utils";
 
 export async function createBlog(values: blogSchemaType) {
-    await checkAuth('admin');
+    const { user } = await checkAuth('admin');
 
     const { success, data, error } = blogSchema.safeParse(values);
 
     if (!success) throwZodErrorMsg(error);
 
-    const inserted = await db.insert(blogs).values({ ...data, content: {}, slug: generateSlug(data.title) }).returning({ id: blogs.id });
+    const inserted = await db.insert(blogs).values({
+        ...data,
+        content: {},
+        slug: generateSlug(data.title),
+        author: user?.name ?? "Unknown",
+    }).returning({ id: blogs.id });
 
     if (inserted.length === 0) throw new Error("Failed to create blog");
 

@@ -53,8 +53,8 @@ export default function RenderCardsBlock({
                                     />
                                 )
                             }
-                            <CardHeader>
-                                {card.title && (
+                            {card.title && (
+                                <CardHeader>
                                     <CardTitle className='sm:text-xl leading-snug'>
                                         {
                                             card.link?.url
@@ -66,8 +66,8 @@ export default function RenderCardsBlock({
                                                 : card.title
                                         }
                                     </CardTitle>
-                                )}
-                            </CardHeader>
+                                </CardHeader>
+                            )}
                             <CardContent>
                                 <p className='text-muted-foreground'>{card.subtitle}</p>
                                 {

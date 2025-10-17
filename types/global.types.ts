@@ -44,12 +44,6 @@ export type TDataSearchParams = {
     q?: string
 }
 
-export enum ERefRelation {
-    Pages = "pages",
-    Blogs = "blogs",
-    Teams = "teams"
-}
-
 export enum EOrder {
     Asc = "ASC",
     Desc = "DESC",

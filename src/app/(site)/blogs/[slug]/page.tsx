@@ -1,12 +1,8 @@
 import { BlogCardSkeleton } from '@/components/site/blogs/blog-card';
 import RelatedBlogs from '@/components/site/blogs/related-blogs';
 import { Button } from '@/components/ui/button';
-import CloudinaryImage from '@/components/ui/cloudinary-image';
 import YooptaEditorReadonly from '@/components/yoopta-editor/readonly';
 import { API_URL } from '@/CONSTANTS';
-import { getReadingTimeInMinutes } from '@/lib/utils';
-import { format } from 'date-fns';
-import { ArrowLeft, Calendar, FileSpreadsheet, Tag, User } from 'lucide-react';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -26,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { slug } = await params;
 
     const res = await serverFetch(`/blogs/${slug}`, {
-        next: { revalidate: parseInt(process.env.DATA_REVALIDATE_SEC!) },
+        next: { revalidate: parseInt(process.env.NEXT_PUBLIC_DATA_REVALIDATE_SEC!) },
     });
 
     if (!res.ok) {
@@ -56,7 +52,7 @@ export default async function SingleBlogPage({ params }: Props) {
     const { slug } = await params;
 
     const res = await fetch(`${API_URL}/blogs/${slug}`, {
-        next: { revalidate: parseInt(process.env.DATA_REVALIDATE_SEC!) },
+        next: { revalidate: parseInt(process.env.NEXT_PUBLIC_DATA_REVALIDATE_SEC!) },
     });
 
     if (!res.ok) {
@@ -108,23 +104,6 @@ export default async function SingleBlogPage({ params }: Props) {
                             </p>
 
                             <YooptaEditorReadonly value={blog.content} />
-                        </div>
-
-                        {/* Author Bio */}
-                        <div className="mt-12 p-6 bg-cream rounded-xl">
-                            <div className="flex items-center">
-                                <img
-                                    src="https://scontent.fktm1-1.fna.fbcdn.net/v/t39.30808-6/401558454_24193895270226074_7245478317597615581_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=4owI84cZm2MQ7kNvwFwTa40&_nc_oc=AdlvSfJo9Z80_JbAlQ1xNDKMaF5z-0YJMvVjL1t5NX8f_3Xl80PVxgsS_LYcK5uxFUc&_nc_zt=23&_nc_ht=scontent.fktm1-1.fna&_nc_gid=k01VXrOLe1At21l9JpyiZQ&oh=00_AfI9SR-XIgcySXTTOP2aCBXING_GQo4Q-8tJ50gJ5Hh07A&oe=682D3B50"
-                                    alt="Annonymous"
-                                    className="w-16 h-16 rounded-full mr-4 object-cover"
-                                />
-                                <div>
-                                    <h3 className="font-bold text-lg">Annonymous</h3>
-                                    <p className="text-slate-600">
-                                        Hello I am from no where.
-                                    </p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

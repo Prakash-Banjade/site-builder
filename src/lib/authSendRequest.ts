@@ -8,10 +8,10 @@ type Props = {
 }
 
 const theme = {
-    brandColor: "#de00a5",
+    brandColor: "#242424",
     background: "#f9f9f9",
     text: "#444",
-    buttonColor: "#de00a5",
+    buttonColor: "#242424",
     buttonText: "#fff",
 }
 
@@ -88,7 +88,7 @@ function html(params: { url: string; host: string }) {
                 <tr>
                   <td align="center" style="padding-bottom: 30px;">
                     <h2 style="margin: 0; font-size: 24px; font-weight: 600; color: ${color.text}; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.3;">
-                      Sign in to <strong style="color: #667eea;">${escapedHost}</strong>
+                      Sign in to <strong>${escapedHost}</strong>
                     </h2>
                     <p style="margin: 12px 0 0 0; font-size: 16px; color: #6b7280; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.5;">
                       Click the button below to securely sign in to your account
@@ -103,7 +103,7 @@ function html(params: { url: string; host: string }) {
                       <tr>
                         <td style="border-radius: 12px; background: ${brandColor}; box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);">
                           <a href="${url}" target="_blank" style="display: inline-block; padding: 16px 32px; font-size: 16px; font-weight: 600; color: white; text-decoration: none; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; transition: all 0.2s ease;">
-                            ✨ Sign in to your account
+                            Sign in to your account
                           </a>
                         </td>
                       </tr>
@@ -118,7 +118,7 @@ function html(params: { url: string; host: string }) {
                       <tr>
                         <td>
                           <p style="margin: 0; font-size: 14px; color: #374151; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.5;">
-                            <strong style="color: #1f2937;">🔒 Security notice:</strong><br>
+                            <strong style="color: #1f2937;">Security notice:</strong><br>
                             This link will expire in 1 hour for your security. If you didn't request this email, you can safely ignore it.
                           </p>
                         </td>

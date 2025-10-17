@@ -10,12 +10,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import Image from 'next/image';
 import Link from 'next/link';
 import { signInAction } from '@/app/(cms)/auth/signin/action'
+import { useTransition } from 'react'
 
 const formSchema = z.object({
     email: z.string().email({ message: "Invalid email address" }).trim(),
 });
 
 export default function SignInForm() {
+    const [isPending, startTransition] = useTransition();
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -23,21 +26,23 @@ export default function SignInForm() {
         },
     });
 
-    async function onSubmit(values: z.infer<typeof formSchema>) {
-        try {
-            await signInAction(values.email);
-        } catch (e) {
-            if (e instanceof Error) {
-                form.setError("email", { type: "manual", message: e.message });
-            } else {
-                form.setError("email", { type: "manual", message: "An unexpected error occurred" });
+    function onSubmit(values: z.infer<typeof formSchema>) {
+        startTransition(async () => {
+            try {
+                await signInAction(values.email);
+            } catch (e) {
+                if (e instanceof Error) {
+                    form.setError("email", { type: "manual", message: e.message });
+                } else {
+                    form.setError("email", { type: "manual", message: "An unexpected error occurred" });
+                }
             }
-        }
+        })
     }
 
     return (
         <>
-            <Card className='min-w-[400px] mt-auto shadow-sm'>
+            <Card className='min-w-[400px] mt-auto shadow-none border-0 bg-transparent'>
                 <CardHeader>
                     <Link href={"/"}>
                         <Image
@@ -63,7 +68,7 @@ export default function SignInForm() {
                                     <FormItem>
                                         <FormLabel>Email</FormLabel>
                                         <FormControl>
-                                            <Input type="email" required placeholder="name@gmail.com" {...field} />
+                                            <Input type="email" autoFocus required placeholder="name@gmail.com" className='h-10' {...field} />
                                         </FormControl>
                                         <FormDescription>
                                             A signin link will be sent to this email address.
@@ -73,7 +78,8 @@ export default function SignInForm() {
                                 )}
                             />
                             <LoadingButton
-                                isLoading={form.formState.isSubmitting}
+                                isLoading={isPending}
+                                disabled={isPending}
                                 type="submit"
                                 loadingText='Sending...'
                                 className="w-full"

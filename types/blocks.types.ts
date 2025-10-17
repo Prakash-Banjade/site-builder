@@ -9,6 +9,7 @@ export enum EBlock {
     Alumni = 'alumni',
     Testimonial = 'testimonial',
     Partner = 'partner',
+    Map = "map"
 }
 
 export type TextBlock = {
@@ -65,9 +66,15 @@ export type CardsBlock = {
     maxColumns?: number
 }
 
+export enum ERefRelation {
+    Events = "events",
+    Blogs = "blogs",
+    Teams = "teams",
+}
+
 export type RefItemBlock = {
     type: EBlock.RefItem
-    ref: string; // 'blogs' | 'events' | 'publications' etc
+    ref: ERefRelation;
     limit: number;
     order?: 'ASC' | 'DESC';
     refIds?: string[] // eg. specific blogIds

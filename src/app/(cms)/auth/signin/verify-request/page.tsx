@@ -41,7 +41,7 @@ export default async function VerifyRequest(props: { searchParams: Promise<Props
     }
 
     return (
-        <Card className="w-full max-w-md">
+        <Card className="w-full max-w-md border-0 shadow-none bg-transparent">
             <CardHeader className="space-y-6">
                 <div className="flex justify-center">
                     <Link href={"/"}>
@@ -55,11 +55,6 @@ export default async function VerifyRequest(props: { searchParams: Promise<Props
                     </Link>
                 </div>
                 <div className="text-center space-y-4">
-                    <div className="flex justify-center">
-                        <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
-                            <CheckCircle className="w-6 h-6 text-green-600" />
-                        </div>
-                    </div>
                     <div className="space-y-2">
                         <h1 className="text-2xl font-semibold tracking-tight">Check your email</h1>
                         <p className="text-sm text-muted-foreground">
@@ -69,12 +64,12 @@ export default async function VerifyRequest(props: { searchParams: Promise<Props
                 </div>
             </CardHeader>
             <CardContent className="space-y-6">
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div className="bg-secondary border rounded-lg p-4">
                     <div className="flex items-start space-x-3">
-                        <Mail className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                        <Mail className="w-5 h-5 mt-0.5 flex-shrink-0" />
                         <div className="space-y-1">
-                            <p className="text-sm font-medium text-blue-900">Click the link in your email to sign in</p>
-                            <p className="text-xs text-blue-700">The link will expire in 1 hour for security reasons</p>
+                            <p className="text-sm font-medium">Click the link in your email to sign in</p>
+                            <p className="text-xs">The link will expire in 1 hour for security reasons</p>
                         </div>
                     </div>
                 </div>

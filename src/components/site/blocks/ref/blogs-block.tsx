@@ -17,7 +17,7 @@ export default async function BlogsBlock({
 
     const res = await serverFetch('/blogs' + '?' + urlSearchParams, {
         next: {
-            revalidate: parseInt(process.env.DATA_REVALIDATE_SEC!)
+            revalidate: parseInt(process.env.NEXT_PUBLIC_DATA_REVALIDATE_SEC!)
         }
     });
 

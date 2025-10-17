@@ -2,13 +2,14 @@ import { BlockComponentProps } from './blocks'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useFormContext } from "react-hook-form";
-import { EOrder, ERefRelation } from '../../../../../../types/global.types';
+import { EOrder } from '../../../../../../types/global.types';
 import { Input } from '@/components/ui/input';
 import { NUMBER_REGEX_STRING } from '@/CONSTANTS';
 import { InfiniteMultiSelect } from '@/components/forms/infinite-multi-select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { TPageDto } from '@/schemas/page.schema';
+import { ERefRelation } from '../../../../../../types/blocks.types';
 
 export default function RefItemBlock({ blockIdx, sectionIdx }: BlockComponentProps) {
     const form = useFormContext<TPageDto>();
@@ -46,6 +47,27 @@ export default function RefItemBlock({ blockIdx, sectionIdx }: BlockComponentPro
                                 }
                             </SelectContent>
                         </Select>
+                        <FormMessage />
+                    </FormItem>
+                )}
+            />
+
+            <FormField
+                control={form.control}
+                name={`${blockName}.cols`}
+                render={({ field }) => (
+                    <FormItem>
+                        <FormLabel>Columns <span className='text-destructive'>*</span></FormLabel>
+                        <FormControl>
+                            <Input
+                                type="number"
+                                className='py-5'
+                                required
+                                pattern={NUMBER_REGEX_STRING}
+                                min={1}
+                                {...field}
+                            />
+                        </FormControl>
                         <FormMessage />
                     </FormItem>
                 )}

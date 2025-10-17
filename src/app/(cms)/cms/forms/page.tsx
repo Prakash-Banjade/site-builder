@@ -17,6 +17,7 @@ export default function FormsPage(props: FormsPageProps) {
             actionTrigger={
                 <Button
                     type="button"
+                    size={'lg'}
                     asChild
                 >
                     <Link href={"forms/new"}>

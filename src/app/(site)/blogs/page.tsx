@@ -4,14 +4,13 @@ import BlogsContainer from '@/components/site/blogs/blogs-container';
 import BlogsSearchFilters_Public from '@/components/site/blogs/blogs-search-filters';
 import RenderHero from '@/components/site/heros/render-hero';
 import { Skeleton } from '@/components/ui/skeleton';
+import { BLOGS_SLUG } from '@/CONSTANTS';
 import { fetchPage } from '@/lib/utilities/fetchPage';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
-const slug = "blogs";
-
 export const generateMetadata = async (): Promise<Metadata> => {
-    const page = await fetchPage(slug);
+    const page = await fetchPage(BLOGS_SLUG);
 
     return {
         title: page.metadata?.title,
@@ -20,8 +19,8 @@ export const generateMetadata = async (): Promise<Metadata> => {
     }
 }
 
-export default async function BlogsPage({ searchParams }: { searchParams: Promise<BlogsPageProps["searchParams"]> }) {
-    const page = await fetchPage(slug);
+export default async function BlogsPage() {
+    const page = await fetchPage(BLOGS_SLUG);
 
     return (
         <>
@@ -37,7 +36,7 @@ export default async function BlogsPage({ searchParams }: { searchParams: Promis
                 {/* Blog Posts Stack */}
                 <div className="space-y-8">
                     <Suspense fallback={Array.from({ length: 3 }, (_, index) => <BlogCardSkeleton key={index} />)}>
-                        <BlogsContainer searchParams={searchParams} />
+                        <BlogsContainer />
                     </Suspense>
                 </div>
             </section>

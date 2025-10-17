@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { updateBlog } from "@/lib/actions/blogs.action";
 import { Badge } from "@/components/ui/badge";
 import { CldImage } from "next-cloudinary";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Star } from "lucide-react";
 import { TooltipWrapper } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
@@ -167,29 +167,18 @@ export default function BlogForm({ defaultValues, categoryOptions }: Props) {
                         disabled={isPublished}
                     />
 
-                    <FormField
-                        control={form.control}
-                        name="categoryId"
-                        render={({ field }) => (
-                            <FormItem>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                    <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select category" />
-                                        </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        {
-                                            categoryOptions.map((category) => (
-                                                <SelectItem key={category.value} value={category.value}>{category.label}</SelectItem>
-                                            ))
-                                        }
-                                    </SelectContent>
-                                </Select>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                     <Select onValueChange={val => form.setValue("categoryId", val)} defaultValue={form.getValues("categoryId")}>
+                        <SelectTrigger className={cn("!h-8", buttonVariants({ variant: 'ghost' }))}>
+                            <SelectValue placeholder="Select category" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {
+                                categoryOptions.map((category) => (
+                                    <SelectItem key={category.value} value={category.value}>{category.label}</SelectItem>
+                                ))
+                            }
+                        </SelectContent>
+                    </Select>
 
                     <AddKeywordsBtn
                         blogId={defaultValues.id}

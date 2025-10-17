@@ -4,6 +4,7 @@ import { cache } from "react"
 import Header from "./header";
 import { ENavLinkType } from "@/schemas/globals.schema";
 import { ECtaVariant } from "../../../types/blocks.types";
+import { HOME_SLUG } from "@/CONSTANTS";
 
 const getHeader = cache(async () => {
     const [existing] = await db.select({
@@ -35,7 +36,7 @@ export default async function Navbar() {
     const navLinks: RefinedSiteNavLinks[] = header.navLinks.map(n => {
         const href = n.type === ENavLinkType.External
             ? n.url
-            : n.url === "home"
+            : n.url === HOME_SLUG
                 ? "/"
                 : n.url.startsWith("/")
                     ? n.url

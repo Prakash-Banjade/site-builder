@@ -25,6 +25,8 @@ import { TFooterSelect } from "@/db/schema/globals";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities"
 import FieldArraySortableContext from "@/components/dnd/field-array-sortable-context";
+import { richTextDefaultValues } from "@/schemas/rich-text.schema";
+import { Editor } from "@/components/editor/blocks/editor-x/editor";
 
 type Props = {
     defaultValues: TFooterSelect;
@@ -37,7 +39,7 @@ export default function FooterForm({ defaultValues }: Props) {
         resolver: zodResolver(footerSchema),
         defaultValues: defaultValues ?? {
             navLinks: [],
-            footerText: ""
+            footerText: richTextDefaultValues
         }
     });
 
@@ -90,9 +92,10 @@ export default function FooterForm({ defaultValues }: Props) {
                                 <FormItem>
                                     <FormLabel>Footer Text</FormLabel>
                                     <FormControl>
-                                        <Textarea
-                                            className="field-sizing-content overflow-y-hidden resize-none w-full"
-                                            {...field}
+                                        <Editor
+                                            placeholder="Eg. Leading Startup In Nepal"
+                                            editorSerializedState={field.value.json}
+                                            onSerializedChange={field.onChange}
                                         />
                                     </FormControl>
                                     <FormMessage />

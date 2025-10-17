@@ -13,4 +13,6 @@ export default async function checkAuth(role?: 'admin' | 'user') {
     if (role && session.user.role !== role) {
         redirect('/profile');
     }
+
+    return session;
 }

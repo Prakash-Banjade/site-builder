@@ -168,3 +168,9 @@ body {
     @apply text-2xl font-normal leading-none tracking-tight;
   }
 }
+
+/* IMPORTANT TO REDUCE HEIGHT OF EMPTY PARAGRAPH */
+.rich_text > p:empty,
+.rich_text > p:has(> br:first-child):not(:first-child):has(+ *) {
+  line-height: 8px !important;
+}

@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { EBlock, ECardsBlockLayout } from "../../types/blocks.types";
-import { EAlignment, ELinkType, EOrder, ERefRelation } from "../../types/global.types";
+import { EBlock, ECardsBlockLayout, ERefRelation } from "../../types/blocks.types";
+import { EAlignment, ELinkType, EOrder } from "../../types/global.types";
 import { CTADtoSchema, HeroSectionDtoSchema } from "./hero-section.schema";
 import { mediaSchema } from "./media.schema";
 import { richTextSchema } from "./rich-text.schema";
@@ -44,8 +44,8 @@ export const CardSchema = z.object({
     title: z
         .string({ required_error: "Title is required" })
         .trim()
-        .min(3, { message: "Title must be between 3 and 50 characters" })
-        .max(100, { message: "Title must be between 3 and 100 characters" }),
+        .max(100, { message: "Title must be less than 100 characters" })
+        .optional(),
     subtitle: z
         .string()
         .trim()
@@ -96,6 +96,7 @@ export const RefItemBlockSchema = BaseBlockSchema.extend({
     type: z.literal(EBlock.RefItem),
     refRelation: z.nativeEnum(ERefRelation),
     limit: z.coerce.number().int().min(1),
+    cols: z.coerce.number().int().min(1),
     order: z.nativeEnum(EOrder),
     selected: z.array(z.object({ // manually choosen items by the user
         value: z.string().min(1, { message: "Value is required" }),
@@ -140,6 +141,11 @@ export const CertificationBlockSchema = BaseBlockSchema.extend({
     type: z.literal(EBlock.Certification),
 });
 
+// --- MapBlockDto ---
+export const MapBlockSchema = BaseBlockSchema.extend({
+    type: z.literal(EBlock.Map),
+});
+
 // ---- Discriminated union of all blocks ----
 export const BlockSchema = z.discriminatedUnion("type", [
     TextBlockSchema,
@@ -151,7 +157,8 @@ export const BlockSchema = z.discriminatedUnion("type", [
     AlumniBlockSchema,
     TestimonialBlockSchema,
     PartnerBlockSchema,
-    CertificationBlockSchema
+    CertificationBlockSchema,
+    MapBlockSchema
 ]);
 
 export type TBlock = z.infer<typeof BlockSchema>;

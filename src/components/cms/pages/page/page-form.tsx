@@ -26,15 +26,15 @@ type Props = {
 const tabs = [
     {
         label: "Hero",
-        value: "hero",
+        value: "heroSections",
     },
     {
         label: "Content",
-        value: "content",
+        value: "sections",
     },
     {
         label: "SEO",
-        value: "seo",
+        value: "metadata",
     }
 ]
 

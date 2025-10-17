@@ -13,7 +13,7 @@ type Props = {
     imgHeight?: number, // this is used to control the height of the image based on the blog card layout
 }
 
-export default async function BlogCard({ blog, imgHeight = 500 }: Props) {
+export default function BlogCard({ blog, imgHeight = 500 }: Props) {
     return (
         <article className="@container">
             <div className='card bg-white shadow-sm rounded-b-xl'>
@@ -62,7 +62,7 @@ export default async function BlogCard({ blog, imgHeight = 500 }: Props) {
 
                             <div className="flex items-center">
                                 <User size={14} className="mr-1" />
-                                <span>Annonymous</span>
+                                <span>{blog.author}</span>
                             </div>
                         </section>
 

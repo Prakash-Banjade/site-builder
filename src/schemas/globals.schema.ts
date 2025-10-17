@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { ECtaVariant } from '../../types/blocks.types';
+import { richTextSchema } from './rich-text.schema';
 
 export const MAX_NAV_LINKS = 10;
 export const MAX_NAV_SUB_LINKS = 20;
@@ -71,10 +72,7 @@ export type THeaderDto = z.infer<typeof headerSchema>;
 
 export const footerSchema = z.object({
     navLinks: navLinksSchema,
-    footerText: z
-        .string()
-        .max(500, { message: 'Footer text must be less than 500 characters' })
-        .optional(),
+    footerText: richTextSchema,
 });
 
 export type TFooterDto = z.infer<typeof footerSchema>;
