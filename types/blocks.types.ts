@@ -9,7 +9,9 @@ export enum EBlock {
     Alumni = 'alumni',
     Testimonial = 'testimonial',
     Partner = 'partner',
-    Map = "map"
+    Map = "map",
+    Timeline = "timeline",
+    ContactText = "contactText",
 }
 
 export type TextBlock = {

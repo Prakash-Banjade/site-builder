@@ -10,6 +10,7 @@ export default function RenderCardsBlock({
     cards,
     columns,
 }: CardsBlockDto) {
+
     return (
         <section
             className={cn(
@@ -39,7 +40,7 @@ export default function RenderCardsBlock({
                         <Card
                             key={index}
                             className={cn(
-                                "overflow-hidden gap-4",
+                                "overflow-hidden gap-0 py-0",
                                 card.borderLess && "border-0"
                             )}
                         >
@@ -47,14 +48,14 @@ export default function RenderCardsBlock({
                                 card.image?.secure_url && (
                                     <CloudinaryImage
                                         src={card.image.secure_url}
-                                        className='w-full object-cover'
+                                        className='w-full h-64 object-cover'
                                         {...card.image}
                                     />
                                 )
                             }
                             {card.title && (
-                                <CardHeader>
-                                    <CardTitle className='sm:text-xl leading-snug'>
+                                <CardHeader className='px-8'>
+                                    <CardTitle className='sm:text-2xl leading-snug font-manrope'>
                                         {
                                             card.link?.url
                                                 ? (
@@ -67,7 +68,7 @@ export default function RenderCardsBlock({
                                     </CardTitle>
                                 </CardHeader>
                             )}
-                            <CardContent>
+                            <CardContent className='px-8 py-8'>
                                 <p className='text-muted-foreground'>{card.subtitle}</p>
                                 <RichTextPreview html={card.description.html} />
                             </CardContent>

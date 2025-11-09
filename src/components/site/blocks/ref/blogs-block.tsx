@@ -1,8 +1,8 @@
 import { RefItemBlockDto } from "@/schemas/page.schema";
-import { ERefRelation } from "../../../../../types/global.types";
 import { serverFetch } from "@/lib/data-access.ts/server-fetch";
 import { TBlogsResponse_Public } from "../../../../../types/blog.types";
 import BlogCard from "../../blogs/blog-card";
+import { ERefRelation } from "../../../../../types/blocks.types";
 
 export default async function BlogsBlock({
     limit,
